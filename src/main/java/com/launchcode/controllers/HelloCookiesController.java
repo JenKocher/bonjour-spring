@@ -62,9 +62,9 @@ public class HelloCookiesController {
         Integer count = 0;
 
         if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals(name)) {
-                    count = Integer.valueOf(cookies[i].getValue()) + 1;
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(name)) {
+                    count = Integer.valueOf(cookie.getValue()) + 1;
                     Cookie newCookie = new Cookie(name, Integer.toString(count));
                     response.addCookie(newCookie);
                 } else {
@@ -73,11 +73,14 @@ public class HelloCookiesController {
                     response.addCookie(newCookie);
                 }
             }
+        } else {
+            count = 1;
+            Cookie newCookie = new Cookie(name, "1");
+            response.addCookie(newCookie);
         }
 
         return greeting + name + " " + count;
     }
-
 
 }
 
